@@ -1,0 +1,8 @@
+Algorythm Tanspose(A,n)
+	input  : nxn 크기의 2차원 행렬 A
+	output : 행렬 A의 전치 행렬 B
+	
+	for(i=0 ~ i=n-1)
+		for(j=0 ~ j=n-1)
+			B[j][i]=A[i][j]
+
