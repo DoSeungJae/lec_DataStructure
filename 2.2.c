@@ -3,6 +3,8 @@
 #define MAX_ELEMENTS 8
 
 
+//주어진 원본 행렬의 전치행렬을 공간복잡도와
+//시간복잡도 모두를 고려하여 작성한 알고리즘. 
 
 typedef struct Element {
     int row, col, val;
@@ -23,18 +25,19 @@ Element* Transpose_Triple2(Element S_a[])
     {
         int row[MAX_ELEMENTS] = { 0 };
         for (int i = 1; i <= num; i++)
-            row[S_a[i].col]++;
+            row[S_a[i].col]++; //각 원소의 빈도수 저장. 빈도수를 저장해야 순서대로 값이
+        //대입될 수 있음.
 
         int pos[MAX_ELEMENTS] = { 0 };
         pos[0] = 1;
         for (int i = 1; i < cols; i++)
-            pos[i] = pos[i - 1] + row[i - 1];
+            pos[i] = pos[i - 1] + row[i - 1];  //원소가 대입될 위치
 
         for (int i = 1; i <= num; i++)
         {
             int abs_pos = pos[S_a[i].col];
             pos[S_a[i].col]++;
-            S_b[abs_pos].row = S_a[i].col;
+            S_b[abs_pos].row = S_a[i].col; //전치행렬이므로 행과 열을 바꿔서 대입.
             S_b[abs_pos].col = S_a[i].row;
             S_b[abs_pos].val = S_a[i].val;
         }
