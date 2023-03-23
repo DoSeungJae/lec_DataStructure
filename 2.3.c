@@ -20,8 +20,7 @@ void insert(Term poly[], int avail, int coef, int expon) { //사용하지 않음.
 }
 
 void Poly_Add(Term poly[], int As, int Ae, int Bs, int Be, int* avail) { //As,Bs는 각각 A항, B항의 계산대상이 되는 부분(시작부분)이고, *e는 항의 끝부분임.
-	int Cs = *avail;
-
+	Cs = *avail; //계산된 항의 시작점
 	int sumCoef = 0;
 
 	//printf("%d", Cs);
@@ -31,7 +30,7 @@ void Poly_Add(Term poly[], int As, int Ae, int Bs, int Be, int* avail) { //As,Bs
 	while (As <= Ae && Bs <= Be) {
 		if (poly[As].expon == poly[Bs].expon) {//A의 항과 B의 항의 차수가 같은 경우에
 			sumCoef = poly[As].coef + poly[Bs].coef;
-			if (sumCoef) {
+			if (sumCoef != 0) {
 
 
 				//insert(sumCoef, poly[As].expon)
@@ -41,6 +40,13 @@ void Poly_Add(Term poly[], int As, int Ae, int Bs, int Be, int* avail) { //As,Bs
 				As += 1; //A와 B둘다 계산했기 때문에 
 				Bs += 1; //둘다 계산대상의 인덱스를 1씩 증가.
 				*avail += 1; //C항에서 써넣을 공간의 인덱스 1증가.
+
+
+			}
+
+			else { //sumCoef==0 위치만 증가시킴, 식이 소거되므르
+				As += 1;
+				Bs += 1;
 
 
 			}
@@ -89,15 +95,14 @@ void Poly_Add(Term poly[], int As, int Ae, int Bs, int Be, int* avail) { //As,Bs
 		//insert(poly[i].coef,poly[i].expon)
 	}
 
-
-
+	Ce = *avail - 1; //계산된 항의 끝점
 
 }
 
 void Print_Poly(Term poly[], int As, int Ae, int Bs, int Be, int avail) { //식을 출력하는 함수
 
-	int Cs = 6;
-	int Ce = 11;
+	//int Cs = 6;
+	//int Ce = 11;
 
 	for (int i = 0; i < avail; i++) {
 		if (i == As)      printf("Polynomial A: ");
@@ -113,6 +118,7 @@ void Print_Poly(Term poly[], int As, int Ae, int Bs, int Be, int avail) { //식을
 		}
 
 		else {
+
 			printf(" + ");
 
 		}
@@ -123,7 +129,7 @@ void Print_Poly(Term poly[], int As, int Ae, int Bs, int Be, int avail) { //식을
 
 
 int main(void) {
-	Term poly[NO_OF_TERMS] = { {3,5},{2,3},{2,0},{4,4},{5,3},{2,1} };
+	Term poly[NO_OF_TERMS] = { {3,5},{2,3},{2,0},{4,4},{-2,3},{2,1} };
 
 	int As = 0;
 	int Ae = 2;
@@ -131,7 +137,7 @@ int main(void) {
 	int Be = 5;
 
 	int avail = 6;
-	Poly_Add(poly, As, Ae, Bs, Be, &avail, &Cs, &Ce);
+	Poly_Add(poly, As, Ae, Bs, Be, &avail);
 	Print_Poly(poly, As, Ae, Bs, Be, avail);
 
 	return 0;
