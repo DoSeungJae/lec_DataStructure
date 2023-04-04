@@ -3,7 +3,7 @@
 #include "MyLinkedList_3.1.h"
 
 Node* Create_Node(int newData) {
-	Node* newNode = (Node*)malloc(sizeof(Node)); //?
+	Node* newNode = (Node*)malloc(sizeof(Node)); 
 
 	newNode->data = newData;
 	newNode->link = NULL;

@@ -9,5 +9,5 @@ Node* Create_Node(int newData); //노드 생성
 void Destroy_Node(Node* node); //노드 소멸
 void Append_Node(Node** head, Node* newNode);//노드 추가
 void Print_Linked_List(Node* head); //연결리스트 출력 함수
-
+//
 #endif

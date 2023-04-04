@@ -13,15 +13,7 @@ int main(void) {
 	Append_Node(&head, newNode);
 
 
-	newNode = Create_Node(100);
-	Append_Node(&head, newNode);
-
 	//연결리스트 전체 출력
 	Print_Linked_List(head);
-
-
-
-
-
 	return 0;
 }
