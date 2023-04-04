@@ -3,7 +3,7 @@
 #include "MyLinkedList_3.3.h"
 
 Node* Create_Node(int newData) {
-	Node* newNode = (Node*)malloc(sizeof(Node)); //?
+	Node* newNode = (Node*)malloc(sizeof(Node)); 
 
 	newNode->data = newData;
 	newNode->link = NULL;
@@ -39,7 +39,7 @@ void Append_Node(Node** head, Node* newNode) {
 }
 
 
-Node* Get_Node(Node* head, int pos) { //.h
+Node* Get_Node(Node* head, int pos) { 
 
 
 	Node* cur = head;
@@ -51,25 +51,17 @@ Node* Get_Node(Node* head, int pos) { //.h
 
 	return cur;
 
-	//Node* tail = head;
-	//while (tail->data!=pos) {
-		//tail = tail->link;
 
-	//}
-
-	//return tail;
 }
 
-void Remove_Node(Node** head, Node* targetNode) {//더 쉽게 될듯?
+void Remove_Node(Node** head, Node* targetNode) {
 
 
 
 
 	//1 헤드 노드를 지울 떄
 	if ((*head)->link == targetNode->link) {
-		//Node* n = (*head);
-		//(*head)->link = n->link;
-		//printf("0\n");
+
 		*head = (*head)->link;
 		free(targetNode);
 
@@ -112,14 +104,16 @@ void Insert_Node_After(Node* currentNode, Node* newNode) {//.h
 }
 
 Node* Revsere_List(Node* head) {
+	//인자로 넣은 연결리스트와 순서가 반대되는 역 연결리스트를 생성하는 함수이다.
+	
 	Node* p = head;
 	Node* q = NULL;
 	Node* r = NULL;
 	while (p != NULL) {
-		r = q;
-		q = p;
-		p = p->link;
-		q->link = r;
+		r = q; //r에 q값을 넣음
+		q = p; //q에 p값을 넣음
+		p = p->link; //p가 다음 노드로 이동함
+		q->link = r; //q의 다음노드를 r로 설정함.
 	}
 
 	return q;
