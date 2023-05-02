@@ -44,9 +44,9 @@ void TreePrinter(int* bTree, int size) {
 
 //아래 함수를 구현
 void PrintAncestor(int* bTree, int size, int idx) {
-	printf("%d의 모든 조상 노드 : ", bTree[idx]);
-	while (idx != 1) {
-		idx = idx / 2;
+	printf("%d의 모든 조상 노드 : ", bTree[idx]); 
+	while (idx != 1) { //idx : 1 >> 루트 노드
+		idx = idx / 2; //idx를 2로 나누어 부모 노드에 접근/
 		printf("%d" ,bTree[idx]);
 		if (idx != 1) printf(" , ");
 
@@ -59,11 +59,11 @@ void PrintAncestor(int* bTree, int size, int idx) {
 
 }
 void PrintLeftDescendant(int* bTree, int size, int idx) {
-	printf("%d의 모든 왼쪽 후손 노드 : ", bTree[idx]);
-	int b = (size+1)/2;
+	printf("%d의 모든 왼쪽 후손 노드 : ", bTree[idx]); 
+	int b = (size+1)/2; 
 	
 	while (idx<b) {
-		idx = 2 * idx;
+		idx = 2 * idx; //idx에 2를 곱하여 왼쪽 자식 노드에 접근
 		printf("%d", bTree[idx]);
 		if (idx < b) printf(" , ");
 
@@ -75,7 +75,7 @@ void PrintLeftDescendant(int* bTree, int size, int idx) {
 void PrintRightDescendant(int* bTree, int size, int idx) {
 	printf("%d의 모든 오른쪽 후손 노드 : ", bTree[idx]);
 	while (idx < size) {
-		idx = 2 * idx + 1;
+		idx = 2 * idx + 1; //idx에 2를 곱하고 1를 더해 오른쪽 자식 노드로 이동.
 		printf("%d", bTree[idx]);
 		if (idx < size) printf(" , ");
 
@@ -89,7 +89,7 @@ void PrintRightDescendant(int* bTree, int size, int idx) {
 int FindNode(int* bTree, int size, int data) {
 	int idx = 1;
 	
-	while (idx != size) {
+	while (idx != size) {//idx를 1씩 더해가며 현재 노드가 타겟노드와 같은지 판별.
 		if (bTree[idx] == data) {
 			return idx;
 		}
