@@ -3,9 +3,9 @@
 #include "MyBinaryTree_7.3.hpp"
 
 BT_Node* BT_Create_Node(int newData) {
-	BT_Node* newNode = (BT_Node*)malloc(sizeof(BT_Node));
+	BT_Node* newNode = (BT_Node*)malloc(sizeof(BT_Node)); //메모리 동적 할당
 	newNode->data = newData;
-	newNode->left = NULL;
+	newNode->left = NULL; //새로운 트리 노드를 생성할 때, 왼쪽 자식과 오른쪽 자식을 널처리
 	newNode->right = NULL;
 
 	return newNode;
@@ -16,14 +16,14 @@ BT_Node* BT_Create_Node(int newData) {
 
 void BT_Destroy_Node(BT_Node* node) {
 	if (node != NULL) {
-		free(node);
+		free(node); //삭제할 노드가 널값이 아니라면 할당 해제
 	}
 
 }
 
 void BT_Make_Left_Sub_Tree(BT_Node* parent, BT_Node* sub) {
 	if (parent->left != NULL) {
-		BT_Destroy_Node(parent->left);
+		BT_Destroy_Node(parent->left); //sub 노드가 부모의 왼쪽 자식이 됨.
 
 	}
 	parent->left = sub;
@@ -34,15 +34,15 @@ void BT_Make_Left_Sub_Tree(BT_Node* parent, BT_Node* sub) {
 
 void BT_Make_Right_Sub_Tree(BT_Node* parent, BT_Node* sub) {
 	if (parent->right != NULL) {
-		BT_Destroy_Node(parent->right);
+		BT_Destroy_Node(parent->right); //sub 노드가 부모의 오른쪽 자식이 됨.
 
 	}
 	parent->right = sub;
 }
 
-void BT_Preorder_Traversal(BT_Node* node) {
+void BT_Preorder_Traversal(BT_Node* node) { //전위 연산 ; 루트 노드를 먼저 출력하고, L -> R
 	if (node != NULL) {
-		printf("%d ",node->data);
+		printf("%d ",node->data); //
 		BT_Preorder_Traversal(node->left);
 		BT_Preorder_Traversal(node->right);
 
@@ -50,7 +50,7 @@ void BT_Preorder_Traversal(BT_Node* node) {
 	}
 }
 
-void BT_Inorder_Traversal(BT_Node* node) {
+void BT_Inorder_Traversal(BT_Node* node) { //중위 연산 ; L -> 루트 -> R 순서대로 출력
 	if (node != NULL) {
 		BT_Inorder_Traversal(node->left);
 		printf("%d ",node->data);
@@ -60,7 +60,7 @@ void BT_Inorder_Traversal(BT_Node* node) {
 	}
 }
 
-void BT_Postorder_Traversal(BT_Node* node) {
+void BT_Postorder_Traversal(BT_Node* node) { //후위 연산 : L -> R -> 루트 순으로 출력
 	if (node != NULL) {
 		BT_Postorder_Traversal(node->left);
 		BT_Postorder_Traversal(node->right);
@@ -72,7 +72,7 @@ void BT_Postorder_Traversal(BT_Node* node) {
 	}
 }
 
-void BT_Count_Node(BT_Node* node, int* count) {
+void BT_Count_Node(BT_Node* node, int* count) { //노드의 개수를 포인터 변수로 표현
 
 	if (node != NULL) {
 		*count += 1;
@@ -84,7 +84,7 @@ void BT_Count_Node(BT_Node* node, int* count) {
 }
 
 
-void BT_Count_Leaf(BT_Node* node, int* count) {
+void BT_Count_Leaf(BT_Node* node, int* count) { //터미널 노드의 개수를 포인터 변수로 표현
 	if (node != NULL) {
 		BT_Count_Leaf(node->left,count);
 		if (node->left == NULL && node->right == NULL) {
@@ -98,7 +98,7 @@ void BT_Count_Leaf(BT_Node* node, int* count) {
 
 }
 
-void BT_TreePrinter(BT_Node* root)
+void BT_TreePrinter(BT_Node* root) 
 {
 	int h = BT_Height(root);
 	int col = (1 << h) - 1;
