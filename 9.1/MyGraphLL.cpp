@@ -5,10 +5,10 @@
 #include "../../5.2/5.2/MyArrayStack.hpp"
 
 
-void ADJ_Degree(int adj_mat[][MAX_VERTICES], int n) {
-	for (int i = 0; i < n; i++) {
+void ADJ_Degree(int adj_mat[][MAX_VERTICES], int n) { //차수 계산.
+	for (int i = 0; i < n; i++) { //행 1개 선택
 		int d = 0;
-		for (int j = 0; j < n; j++) {
+		for (int j = 0; j < n; j++) { //선택된 행에 모든 열 값 계산. 
 			d = d + adj_mat[i][j];
 
 		}
@@ -19,15 +19,16 @@ void ADJ_Degree(int adj_mat[][MAX_VERTICES], int n) {
 
 }
 
-void ADJ_Insert(G_Node** List, int i, int j) {
+void ADJ_Insert(G_Node** List, int i, int j) { //정점 i에 연결된 정점j를 연결리스트로 연결; 순서 무관.
 	G_Node* newNode = (G_Node*)malloc(sizeof(G_Node));
 	(newNode)->vertex = j;
-	(newNode)->link = List[i]; //?
+	(newNode)->link = List[i]; 
 	List[i] = newNode;
 
 }
 
-void ADJ_Mat2List(int adj_mat[][MAX_VERTICES], int n, G_Node** List) {
+void ADJ_Mat2List(int adj_mat[][MAX_VERTICES], int n, G_Node** List) { //행열을 리스트에 넣음.
+
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < n; j++) {
 			if (adj_mat[i][j] == 1) {
@@ -47,33 +48,33 @@ void Graph_DFS(G_Node** List, int v) {
 
 	ArrStack<int> stack;
 	do {
-		bool vFlag = false;
-		if (visited[cur] == 0) {
-			printf("%d ", cur);
-			visited[cur] = 1;
-			vFlag = true;
+		bool vFlag = false; 
+		if (visited[cur] == 0) { //방문하지 않았을 때 
+			printf("%d ", cur); 
+			visited[cur] = 1; //방문
+			vFlag = true; 
 		}
 		else {
-			G_Node* iter = List[cur];
+			G_Node* iter = List[cur]; //iter에 대상 정점의 인접 정점을 포함한 연결 리스트를 저장.
 			while (iter != NULL) {
-				if (visited[iter->vertex] == 0) {
+				if (visited[iter->vertex] == 0) { //정점을 방문하지 않았을 때
 					
-					stack.Stack_Push(cur);
+					stack.Stack_Push(cur); //정점에 대한 정보를 스택에 저장.
 					cur = iter->vertex;
 					vFlag = true;
 					break;
 
 				}
-				iter = iter->link;	 
+				iter = iter->link;	 //다음으로 이동
 			}
 		}
-		if (vFlag == false) {
+		if (vFlag == false) { //인접행렬을 모두 방문했을 때
 			if (stack.Stack_IsEmpty()) break;
-			else cur = stack.Stack_Pop();
+			else cur = stack.Stack_Pop(); //팝 시킨 것을 출력; 되돌아감.
 
 		}
 
-	} while (!stack.Stack_IsEmpty());
+	} while (!stack.Stack_IsEmpty()); 
 
 	printf("\n");
 
@@ -86,7 +87,7 @@ void Graph_DFS_Recursive(G_Node** List, int v) {
 	static int visited[7] = { 0 };
 
 	G_Node* iter = List[v];
-	visited[v] = 1;
+	visited[v] = 1; //방문 처리
 
 	printf("%d ", v);
 
@@ -97,7 +98,7 @@ void Graph_DFS_Recursive(G_Node** List, int v) {
 	}
 }
 
-void ADJ_Create(const char* g_file, int adj_mat[][MAX_VERTICES])
+void ADJ_Create(const char* g_file, int adj_mat[][MAX_VERTICES]) //파일을 읽어 인접 행렬 생성
 {
 	FILE* file;
 	fopen_s(&file, g_file, "r"); //read mode
